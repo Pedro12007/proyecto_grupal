@@ -3,8 +3,7 @@ print("""Sistema de Reserva de Vuelos
 Opciones:
     1. Creación de vuelos
     2. Reservar un vuelo
-    3. Selección de asiento
-    4. Ver reservas
+    3. Ver reservas
 """)
 
 option = input("Ingrese una opción: ")
