@@ -37,8 +37,8 @@ Sistema de Reserva de Vuelos
         if len(lista_vuelos)==0:
             print("No hay vuelos disponibles")
         elif len(lista_vuelos)>=1:    
-            for vuelos in lista_vuelos:
-                print(f'Código de vuelo: {vuelos['codigo']}. Viaje de: {vuelos['origen']} a {vuelos['destino']}. Asientos disponibles: {list(vuelos['asientos_disponibles'].values()).count(1)}')
+            for i, vuelos in zip(range(len(lista_vuelos)+1), lista_vuelos):
+                print(f'{i}. Código de vuelo: {vuelos['codigo']}. Viaje de: {vuelos['origen']} a {vuelos['destino']}. Asientos disponibles: {list(vuelos['asientos_disponibles'].values()).count(1)}')
 
 
 
