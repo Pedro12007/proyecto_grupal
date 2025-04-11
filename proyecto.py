@@ -19,8 +19,13 @@ Sistema de Reserva de Vuelos
     if option == '1': #Creación de vuelos
         vuelo = {}
 
-        codigo_vuelo = input("Ingrese un código único de vuelo: ")
-        codigos_unicos.append(codigo_vuelo)
+        while True:
+            codigo_vuelo = input("Ingrese un código único de vuelo: ")
+            if not(codigo_vuelo in codigos_unicos):
+                codigos_unicos.append(codigo_vuelo)
+                break
+            else: 
+                print("El código ya ha sido utilizado, cree uno nuevo.\n")
 
         origen = input("Ingrese un origen: ")
         destino = input("Ingrese un destino: ")
