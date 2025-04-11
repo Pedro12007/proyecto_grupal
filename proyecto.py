@@ -74,7 +74,8 @@ Sistema de Reserva de Vuelos
                     asiento = int(asiento)
                     if lista_vuelos[e_vuelo]['asientos_disponibles'][asiento] == 1: #Verifica si está disponible
                         lista_vuelos[e_vuelo]['asientos_disponibles'][asiento] = 0
-                        print(f'Asiento "{asiento}" reservado.')
+
+                        print(f'Asiento "{asiento}" reservado exitosamente.')
                         reserva = [e_vuelo, asiento]
                         reservas.append(reserva)
                         break
@@ -90,8 +91,49 @@ Sistema de Reserva de Vuelos
             print("No hay reservas.")
         elif len(reservas) >= 1:
             print("RESERVAS: ")
-            for reserva in reservas:
-                print(f'Código de vuelo: {lista_vuelos[reserva[0]]['codigo']}. Asiento reservado: {reserva[1]}' )
+            for i, reserva in zip(range(len(reservas)+1), reservas):
+                print(f'{i}. Código de vuelo: {lista_vuelos[reserva[0]]['codigo']}. Asiento reservado: {reserva[1]}' )
+
+
+            eleccion = input("\n¿Desea cambiar asiento en alguna reserva? (1:si / otro caracter:no): ")
+            
+            if eleccion == '1':
+                while True:
+                    e_reserva = input('Seleccione una reserva por númeración: ')
+                    if e_reserva.isdigit() and int(e_reserva)>=0 and int(e_reserva) <= len(reservas)-1:
+                        e_reserva = int(e_reserva)
+
+                        print('\nASIENTOS: 1=Disponible 0=Ocupado')
+                        print(lista_vuelos[reservas[e_reserva][0]]['asientos_disponibles'])
+
+                        while True:
+                            asiento = input("Ingrese el asiento que desea reservar: ")
+                            if asiento.isdigit() and int(asiento) >= 1 and int(asiento) <= len(lista_vuelos[reservas[e_reserva][0]]['asientos_disponibles']): #Verifica que el asiento exista
+                                asiento = int(asiento)
+                                if lista_vuelos[reservas[e_reserva][0]]['asientos_disponibles'][asiento] == 1: #Verifica si está disponible
+                                    lista_vuelos[reservas[e_reserva][0]]['asientos_disponibles'][asiento] = 0                        
+                                    lista_vuelos[reservas[e_reserva][0]]['asientos_disponibles'][reservas[e_reserva][1]] = 1
+
+                                    reservas[e_reserva][1] = asiento
+
+                                    print(f'Asiento "{asiento}" reservado exitosamente.')
+                                    break
+
+                                elif lista_vuelos[reservas[e_reserva][0]]['asientos_disponibles'][asiento] == 0: #Verifica si está ocupado
+                                    print('Asiento ocupado.\n')
+                        
+                            else:
+                                print("Asiento inexistente. Intente de nuevo.\n")
+
+                        break
+
+                    else:
+                        print("Reserva inexistente. Intente de nuevo.\n")
+
+                        
 
     if option == '4':
         break
+
+    if not(option in '1234'):
+        print('Opcion invalida.')
