@@ -1,3 +1,8 @@
+#Integrantes:
+#Pedro Monroy
+#Javier Huertas
+#Fabritzio López
+
 lista_vuelos = []
 codigos_unicos = []
 reservas = []
